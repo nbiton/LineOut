@@ -1,0 +1,26 @@
+{
+  "name": "lineout",
+  "version": "1.0.0",
+  "description": "A simple chaining wrapper for the WebAudio API ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Not tested\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbiton/LineOut.git"
+  },
+  "keywords": [
+    "web",
+    "audio"
+  ],
+  "author": [
+    { "name": "Naor Biton", "email": "naor.biton@gmail.com" },
+    { "name": "Tan Shiaw Uen", "email": "shiawuen@gmail.com" }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nbiton/LineOut/issues"
+  },
+  "homepage": "https://github.com/nbiton/LineOut#readme"
+}
