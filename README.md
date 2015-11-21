@@ -6,7 +6,7 @@ This library encourages intuitive functional programming, when creating a networ
 ## Why do I need this?
 When using the native WebAudio API, you normally have to create your nodes and connect them to each other, starting with the output and ending with the input.
 This is how it would typically look like:
-```
+```js
   var audioContext = new AudioContext()
   
   var envelope = audioContext.createGain()
@@ -34,7 +34,7 @@ This is how it would typically look like:
 ```
  
 Using LineOut to accomplish the same thing, would look like this:
-```
+```js
     var l = LineOut(audioContext)
     l.createOscillator() // Input generator
       .options(node => {
@@ -44,12 +44,14 @@ Using LineOut to accomplish the same thing, would look like this:
       })
       .createGain()
       .options(node => node.gain.value = 30)
-      .pipe('osc.detune')
+      .pipe('osc.detune') // connect to it when it is created
 
     l.createOscillator('osc')
       .options(node => {
         node.type = 'sawtooth'
         node.detune.value = pitch * 100
+        node.start(startTime)
+        node.stop(endTime + 2)
       })
       .createGain()
       .options(node => {
@@ -60,3 +62,25 @@ Using LineOut to accomplish the same thing, would look like this:
       .lineout() // connect to audioContext.destination
 ```
 
+## Getting Started
+
+Install from npm
+```
+npm install lineout
+```
+
+Hook it up to the audio context
+```js
+var LineOut = require('lineout')
+
+var audioContext = new AudioContext()
+var lo = LineOut(audioContext)
+
+lo.createOscillator()
+.options((node, ctx) => {
+  node.detune.value = 300
+  node.start(ctx.currentTime)
+  node.stop(ctx.currentTime + 2)
+})
+.lineout()
+```
